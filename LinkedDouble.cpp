@@ -12,7 +12,7 @@ LinkedDouble<T>::LinkedDouble() {
 
 template<class T>
 bool LinkedDouble<T>::isEmpty() {
-    return (head == NULL && head == NULL);
+    return head == NULL && last == NULL;
 }
 
 template<class T>
@@ -46,6 +46,7 @@ void LinkedDouble<T>::addNodeSorted(T info) {
     Node<T> *node = new Node<T>(info);
     if (isEmpty()) {
         head = node;
+        last = node;
     } else {
         Node<T> *actual = head;
         Node<T> *previous = NULL;
@@ -55,11 +56,24 @@ void LinkedDouble<T>::addNodeSorted(T info) {
             actual = actual->next;
         }
         if (previous == NULL) {
+            node->next = previous;
+            if (head != NULL) {
+                head->previous = node;
+            }
             head = node;
+            if (last == NULL) {
+                last = node;
+            }
         } else {
+            node->next = actual;
+            node->previous = previous;
             previous->next = node;
+            if (actual != NULL) {
+                actual->previous = node;
+            } else {
+                last = node;
+            }
         }
-        node->next = actual;
     }
 }
 

@@ -107,6 +107,6 @@ int TeamManagement<T>::getListSize() {
 }
 
 template<class T>
-vector<T> TeamManagement<T>::getListOfTeams(bool direction) {
-    return linkedDouble->getList(direction);
+vector<T> TeamManagement<T>::getListOfTeams(bool fw) {
+    return linkedDouble->getList(fw);;
 }
