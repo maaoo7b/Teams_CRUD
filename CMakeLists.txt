@@ -12,4 +12,5 @@ add_executable(DoubleLinkedLists main.cpp
         ELigue.h
         TeamManagement.cpp
         TeamManagement.h
+        ECountry.h
 )
