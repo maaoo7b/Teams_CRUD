@@ -8,15 +8,16 @@
 #include <string>
 #include <ostream>
 #include "ELigue.h"
+#include "ECountry.h"
 
 using namespace std;
 
 class Teams {
 public:
-    Teams();
+    explicit Teams();
 
-    Teams(int idTeam, const string &stadiumName, const string &dateOpening, bool inRemodelation, const string &teamName,
-          const string &cityName, int capacity, ELigue ligue);
+    Teams(int idTeam, const string &stadiumName, const string &teamName, ECountry country, ELigue ligue, int capacity,
+          bool inRemodelation);
 
     int getIdTeam() const;
 
@@ -26,29 +27,25 @@ public:
 
     void setStadiumName(const string &stadiumName);
 
-    const string &getDateOpening() const;
-
-    void setDateOpening(const string &dateOpening);
-
-    bool isInRemodelation() const;
-
-    void setInRemodelation(bool inRemodelation);
-
     const string &getTeamName() const;
 
     void setTeamName(const string &teamName);
 
-    const string &getCityName() const;
+    ECountry getCountry() const;
 
-    void setCityName(const string &cityName);
+    void setCountry(ECountry country);
+
+    ELigue getLigue() const;
+
+    void setLigue(ELigue ligue);
 
     int getCapacity() const;
 
     void setCapacity(int capacity);
 
-    ELigue getLigue() const;
+    bool isInRemodelation() const;
 
-    void setLigue(ELigue ligue);
+    void setInRemodelation(bool inRemodelation);
 
     friend ostream &operator<<(ostream &os, const Teams &teams);
 
@@ -56,12 +53,11 @@ private:
 
     int idTeam;
     string stadiumName;
-    string dateOpening;
-    bool inRemodelation;
     string teamName;
-    string cityName;
-    int capacity;
+    ECountry country;
     ELigue ligue;
+    int capacity;
+    bool inRemodelation;
 };
 
 

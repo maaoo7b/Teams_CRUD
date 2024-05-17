@@ -4,21 +4,14 @@
 
 #include "Teams.h"
 
-
 Teams::Teams() {
 
 }
 
-Teams::Teams(int idTeam, const string &stadiumName, const string &dateOpening, bool inRemodelation,
-             const string &teamName, const string &cityName, int capacity, ELigue ligue) : idTeam(idTeam),
-                                                                                           stadiumName(stadiumName),
-                                                                                           dateOpening(dateOpening),
-                                                                                           inRemodelation(
-                                                                                                   inRemodelation),
-                                                                                           teamName(teamName),
-                                                                                           cityName(cityName),
-                                                                                           capacity(capacity),
-                                                                                           ligue(ligue) {}
+Teams::Teams(int idTeam, const string &stadiumName, const string &teamName, ECountry country, ELigue ligue,
+             int capacity, bool inRemodelation) : idTeam(idTeam), stadiumName(stadiumName), teamName(teamName),
+                                                  country(country), ligue(ligue), capacity(capacity),
+                                                  inRemodelation(inRemodelation) {}
 
 int Teams::getIdTeam() const {
     return idTeam;
@@ -36,22 +29,6 @@ void Teams::setStadiumName(const string &stadiumName) {
     Teams::stadiumName = stadiumName;
 }
 
-const string &Teams::getDateOpening() const {
-    return dateOpening;
-}
-
-void Teams::setDateOpening(const string &dateOpening) {
-    Teams::dateOpening = dateOpening;
-}
-
-bool Teams::isInRemodelation() const {
-    return inRemodelation;
-}
-
-void Teams::setInRemodelation(bool inRemodelation) {
-    Teams::inRemodelation = inRemodelation;
-}
-
 const string &Teams::getTeamName() const {
     return teamName;
 }
@@ -60,12 +37,20 @@ void Teams::setTeamName(const string &teamName) {
     Teams::teamName = teamName;
 }
 
-const string &Teams::getCityName() const {
-    return cityName;
+ECountry Teams::getCountry() const {
+    return country;
 }
 
-void Teams::setCityName(const string &cityName) {
-    Teams::cityName = cityName;
+void Teams::setCountry(ECountry country) {
+    Teams::country = country;
+}
+
+ELigue Teams::getLigue() const {
+    return ligue;
+}
+
+void Teams::setLigue(ELigue ligue) {
+    Teams::ligue = ligue;
 }
 
 int Teams::getCapacity() const {
@@ -76,12 +61,12 @@ void Teams::setCapacity(int capacity) {
     Teams::capacity = capacity;
 }
 
-ELigue Teams::getLigue() const {
-    return ligue;
+bool Teams::isInRemodelation() const {
+    return inRemodelation;
 }
 
-void Teams::setLigue(ELigue ligue) {
-    Teams::ligue = ligue;
+void Teams::setInRemodelation(bool inRemodelation) {
+    Teams::inRemodelation = inRemodelation;
 }
 
 
@@ -99,11 +84,44 @@ ostream &operator<<(ostream &os, ELigue ligue) {
         case ELigue::BUNDESLIGA:
             os << "Bundesliga";
             break;
-        case ELigue::LIGUE_ONE:
+        case ELigue::LIGUE_1:
             os << "Ligue 1";
             break;
         case ELigue::SÜPER_LIG:
             os << "Süper Lig";
+            break;
+        case ELigue::EREDIVISIE:
+            os << "Erevidisie";
+            break;
+        case ELigue::PRIMEIRA_LIGA:
+            os << "Primeira Liga";
+            break;
+        default:
+            os << "Unknown";
+            break;
+    }
+    return os;
+}
+
+ostream &operator<<(ostream &os, const ECountry &country) {
+    switch (country) {
+        case ECountry::SPAIN:
+            os << "Spain";
+            break;
+        case ECountry::ENGLAND:
+            os << "England";
+            break;
+        case ECountry::ITALY:
+            os << "Italy";
+            break;
+        case ECountry::GERMANY:
+            os << "Germany";
+            break;
+        case ECountry::FRANCE:
+            os << "France";
+            break;
+        case ECountry::TÜRKEY:
+            os << "Turkey";
             break;
         default:
             os << "Unknown";
@@ -113,14 +131,13 @@ ostream &operator<<(ostream &os, ELigue ligue) {
 }
 
 ostream &operator<<(ostream &os, const Teams &teams) {
-    os << "Team ID: " << teams.getIdTeam() << endl;
-    os << "Stadium: " << teams.getStadiumName() << endl;
-    os << "Date of Opening: " << teams.getDateOpening() << endl;
-    os << "Under Remodelation: " << (teams.isInRemodelation() ? "Yes" : "No") << endl;
-    os << "Team Name: " << teams.getTeamName() << endl;
-    os << "City: " << teams.getCityName() << endl;
-    os << "Capacity: " << teams.getCapacity() << endl;
-    os << "League: " << teams.getLigue() << endl;
+    os << "Team ID: " << teams.idTeam << "\n"
+       << "Stadium Name: " << teams.stadiumName << "\n"
+       << "Team Name: " << teams.teamName << "\n"
+       << "Country: " << teams.country << "\n"
+       << "Ligue: " << teams.ligue << "\n"
+       << "Capacity: " << teams.capacity << "\n"
+       << "In Remodelation: " << (teams.inRemodelation ? "Yes" : "No") << "\n";
     return os;
 }
 
