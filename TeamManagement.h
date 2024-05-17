@@ -15,21 +15,19 @@ class TeamManagement {
 public:
     TeamManagement();
 
-    bool isEmpty();
-
     bool addTeamFirst(T);
 
     bool addTeamLast(T);
 
-    bool addTeamAfter(Node<T> *, T);
+    bool addTeamAfter(int, T);
 
-    bool addTeamBefore(Node<T> *, T);
+    bool addTeamBefore(int, T);
 
     bool addTeamSorted(T);
 
-    bool deleteTeam(Node<T> *);
+    bool deleteTeam(int);
 
-    Node<T> *findTeam(int);
+    T *findTeam(int);
 
     T *findTeamInfo(int);
 
@@ -40,6 +38,7 @@ public:
     T getLastTeam();
 
     std::vector<T> getListOfTeams(bool);
+
 private:
     LinkedDouble<T> *linkedDouble;
 };

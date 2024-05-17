@@ -50,7 +50,7 @@ void LinkedDouble<T>::addNodeSorted(T info) {
         Node<T> *actual = head;
         Node<T> *previous = NULL;
 
-        while (actual != NULL && node->info.getIdTeam().compare(actual->info.getIdTeam()) > 0) {
+        while (actual != NULL && actual->info.getIdTeam() < node->info.getIdTeam()) {
             previous = actual;
             actual = actual->next;
         }
@@ -93,7 +93,7 @@ template<class T>
 Node<T> *LinkedDouble<T>::findNode(int idTeam) {
     Node<T> *aux = head;
     while (aux != NULL) {
-        if (aux->info.getIdTeam().compare(idTeam) == 0) {
+        if (aux->info.getIdTeam() == idTeam) {
             return aux;
         }
         aux = aux->next;
