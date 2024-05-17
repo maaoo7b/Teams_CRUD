@@ -6,6 +6,7 @@
 #define DOUBLELINKEDLISTS_LINKEDDOUBLE_H
 
 #include "Node.h"
+#include "TeamManagement.h"
 #include <vector>
 
 using namespace std;
@@ -25,11 +26,13 @@ public:
 
     void addNodeBeforeTo(Node<T> *, T);
 
+    void addNodeSorted(T);
+
+    T deleteNode(Node<T> *);
+
     Node<T> *findNode(int);
 
     T *findInfo(int);
-
-    T deleteNode(Node<T> *);
 
     int getSize();
 
@@ -39,16 +42,13 @@ public:
 
     T getLast();
 
-    void addNodeSorted(T);
-
-    vector<T> getList(bool);
+    std::vector<T> getList(bool);
 
     virtual ~LinkedDouble();
 
 private:
     Node<T> *head;
     Node<T> *last;
-
 };
 
 #endif //DOUBLELINKEDLISTS_LINKEDDOUBLE_H

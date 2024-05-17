@@ -9,4 +9,7 @@ add_executable(DoubleLinkedLists main.cpp
         LinkedDouble.h
         Teams.cpp
         Teams.h
-        ELigue.h)
+        ELigue.h
+        TeamManagement.cpp
+        TeamManagement.h
+)

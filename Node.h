@@ -13,6 +13,7 @@ class LinkedDouble;
 template<class T>
 class Node {
     friend class LinkedDouble<T>;
+
 public:
     Node() {
         next = NULL;

@@ -22,8 +22,8 @@ void LinkedDouble<T>::addNodeFirst(T info) {
         head = newNode;
         last = newNode;
     } else {
-        head->previous = newNode;
         newNode->next = head;
+        head->previous = newNode;
         head = newNode;
     }
 }
@@ -65,7 +65,7 @@ void LinkedDouble<T>::addNodeSorted(T info) {
 
 template<class T>
 void LinkedDouble<T>::addNodeAfterTo(Node<T> *after, T info) {
-    if (after = last) {
+    if (after == last) {
         addNodeLast(info);
     } else {
         Node<T> *node = new Node<T>(info);
@@ -105,7 +105,7 @@ template<class T>
 T *LinkedDouble<T>::findInfo(int idTeam) {
     Node<T> *aux = head;
     while (aux != NULL) {
-        if (aux->info.getIdTeam().compare(idTeam == 0)) {
+        if (aux->info.getIdTeam() == idTeam) {
             return &aux->info;
         }
         aux = aux->next;
@@ -140,8 +140,8 @@ T LinkedDouble<T>::deleteNode(Node<T> *node) {
 }
 
 template<class T>
-vector<T> LinkedDouble<T>::getList(bool forward) {
-    vector<T> out;
+std::vector<T> LinkedDouble<T>::getList(bool forward) {
+    std::vector<T> out;
     Node<T> *aux = forward ? head : last;
     while (aux != NULL) {
         out.push_back(aux->info);
