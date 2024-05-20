@@ -15,7 +15,7 @@ TeamManagement<T>::TeamManagement() {
 
 template<class T>
 bool TeamManagement<T>::addTeamFirst(T teamInfo) {
-    if (linkedDouble->findInfo(teamInfo.getIdTeam()) == NULL) {
+    if (linkedDouble->findNode(teamInfo.getIdTeam()) == NULL) {
         linkedDouble->addNodeFirst(teamInfo);
         return true;
     }
@@ -24,7 +24,7 @@ bool TeamManagement<T>::addTeamFirst(T teamInfo) {
 
 template<class T>
 bool TeamManagement<T>::addTeamLast(T teamInfo) {
-    if (linkedDouble->getObject(teamInfo.getIdTeam()) == NULL) {
+    if (linkedDouble->findNode(teamInfo.getIdTeam()) == NULL) {
         linkedDouble->addNodeLast(teamInfo);
         return true;
     }
@@ -55,7 +55,7 @@ bool TeamManagement<T>::addTeamBefore(int idTeam, T teamInfo) {
 
 template<class T>
 bool TeamManagement<T>::addTeamSorted(T teamInfo) {
-    if (linkedDouble->getObject(teamInfo.getIdTeam()) == NULL) {
+    if (linkedDouble->findNode(teamInfo.getIdTeam()) == NULL) {
         linkedDouble->addNodeSorted(teamInfo);
         return true;
     }
@@ -75,11 +75,11 @@ bool TeamManagement<T>::deleteTeam(int idTeam) {
 }
 
 template<class T>
-T *TeamManagement<T>::findTeam(int idTeam) {
-    if (linkedDouble->getObject(idTeam) != NULL) {
-        return linkedDouble->getObject(idTeam);
+bool TeamManagement<T>::findTeam(int idTeam) {
+    if (linkedDouble->findNode(idTeam) != NULL) {
+        return true;
     }
-    return NULL;
+    return false;
 }
 
 template<class T>

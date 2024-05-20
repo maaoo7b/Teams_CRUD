@@ -27,7 +27,7 @@ public:
 
     bool deleteTeam(int);
 
-    T *findTeam(int);
+    bool findTeam(int);
 
     T *findTeamInfo(int);
 
