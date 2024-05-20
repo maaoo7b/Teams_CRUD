@@ -28,6 +28,12 @@ void getFirstTeam();
 
 void getLastTeam();
 
+void addTeamBefore();
+
+void addTeamAfter();
+
+void searchTeamInfo();
+
 TeamManagement<Teams> *team = new TeamManagement<Teams>();
 
 int main() {
@@ -69,6 +75,12 @@ void mainMenu() {
             case 3:
                 addTeamLast();
                 break;
+            case 4:
+                addTeamBefore();
+                break;
+            case 5:
+                addTeamAfter();
+                break;
             case 6:
                 getFirstTeam();
                 break;
@@ -78,14 +90,109 @@ void mainMenu() {
             case 8:
                 deleteTeam();
                 break;
-                // Add cases for other options here
+            case 10:
+                searchTeamInfo();
+                break;
             case 11:
                 getTeams();
                 break;
+            case 12:
+                cout<<"Program finished"<<endl;
+                break;
             default:
                 cout << "Invalid option. Please try again." << endl;
+                break;
         }
     } while (menuOption != 12);
+}
+
+void searchTeamInfo() {
+    cout << "Type idTeam you want info about: \n" << endl;
+    int idTeam;
+    cin >> idTeam;
+    cout << (team->findTeam(idTeam) ? reinterpret_cast<const char *>(team->findTeamInfo(idTeam))
+                                    : "Team not found! Check idTeam\n") << endl;
+    cout << "Press Enter to continue...\n" << endl;
+    cin.get();
+}
+
+void addTeamBefore() {
+    cout << "Type id team: ";
+    int idTeam;
+    cin >> idTeam;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear the buffer
+
+    cout << "Type stadium name: ";
+    string stadiumName;
+    getline(cin, stadiumName);
+
+    cout << "Type team name: ";
+    string teamName;
+    getline(cin, teamName);
+
+    ECountry country = selectCountry();
+    ELigue ligue = selectLigue();
+
+    cout << "Stadium's capacity: ";
+    int capacity;
+    cin >> capacity;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear the buffer
+
+    cout << "Stadium under remodelation? (Y/N): ";
+    char remodelationInput;
+    cin >> remodelationInput;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear the buffer
+    bool remodelation = (remodelationInput == 'Y' || remodelationInput == 'y');
+
+    cout << "Type before which idTeam you want to add? " << endl;
+    int idTeamBefore;
+    cin >> idTeamBefore;
+    cout << (team->addTeamBefore(idTeamBefore,
+                                 Teams(idTeam, stadiumName, teamName, country, ligue, capacity, remodelation))
+             ? "Team added succesfully!!\n" : "Team couldn't be added. Check ID_Team\n") << endl;
+    cout << "Press Enter to continue...\n" << endl;
+    cin.get();
+}
+
+void addTeamAfter() {
+    cout << "Type id team: ";
+    int idTeam;
+    cin >> idTeam;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear the buffer
+
+    cout << "Type stadium name: ";
+    string stadiumName;
+    getline(cin, stadiumName);
+
+    cout << "Type team name: ";
+    string teamName;
+    getline(cin, teamName);
+
+    ECountry country = selectCountry();
+    ELigue ligue = selectLigue();
+
+    cout << "Stadium's capacity: ";
+    int capacity;
+    cin >> capacity;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear the buffer
+
+    cout << "Stadium under remodelation? (Y/N): ";
+    char remodelationInput;
+    cin >> remodelationInput;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear the buffer
+    bool remodelation = (remodelationInput == 'Y' || remodelationInput == 'y');
+
+    cout << "Type after which idTeam you want to add? " << endl;
+    int idTeamAfter;
+    cin >> idTeamAfter;
+
+    cout << (team->addTeamAfter(idTeamAfter,
+                                Teams(idTeam, stadiumName, teamName, country, ligue, capacity, remodelation))
+             ? "Team added succesfully!!\n" : "Team couldn't be added. Check ID_Team\n") << endl;
+    cout << "Press Enter to continue...\n" << endl;
+    cin.get();
+
+
 }
 
 void getLastTeam() {
@@ -100,8 +207,10 @@ void deleteTeam() {
     cout << "Type idTeam to delete: " << endl;
     int idTeam;
     cin >> idTeam;
-    team->deleteTeam(idTeam);
-    cout << "Team deleted succesfully" << "\n" << endl;
+    cout << (team->deleteTeam(idTeam) ? "Team deleted succesfully!!\n" : "Team couldn't be deleyed. Check ID_Team\n")
+         << endl;
+    cout << "Press Enter to continue...\n" << endl;
+    cin.get();
 }
 
 void addTeamLast() {
@@ -131,9 +240,9 @@ void addTeamLast() {
     cin >> remodelationInput;
     cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear the buffer
     bool remodelation = (remodelationInput == 'Y' || remodelationInput == 'y');
-
-    team->addTeamLast(Teams(idTeam, stadiumName, teamName, country, ligue, capacity, remodelation));
-    cout << "Team added successfully. Press Enter to continue...\n";
+    cout << (team->addTeamLast(Teams(idTeam, stadiumName, teamName, country, ligue, capacity, remodelation))
+             ? "Team added succesfully!!\n" : "Team couldn't be added. Check ID_Team\n") << endl;
+    cout << "Press Enter to continue...\n";
     cin.get();
 }
 
@@ -165,8 +274,9 @@ void addTeamFirst() {
     cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear the buffer
     bool remodelation = (remodelationInput == 'Y' || remodelationInput == 'y');
 
-    team->addTeamFirst(Teams(idTeam, stadiumName, teamName, country, ligue, capacity, remodelation));
-    cout << "Team added successfully. Press Enter to continue...\n";
+    cout << (team->addTeamFirst(Teams(idTeam, stadiumName, teamName, country, ligue, capacity, remodelation))
+             ? "Team added succesfully!!\n" : "Team couldn't be added. Check ID_Team\n") << endl;
+    cout << "Press Enter to continue...\n";
     cin.get();
 }
 
@@ -209,9 +319,9 @@ void addTeam() {
     cin >> remodelationInput;
     cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear the buffer
     bool remodelation = (remodelationInput == 'Y' || remodelationInput == 'y');
-
-    team->addTeamSorted(Teams(idTeam, stadiumName, teamName, country, ligue, capacity, remodelation));
-    cout << "Team added successfully. Press Enter to continue...\n";
+    cout << (team->addTeamSorted(Teams(idTeam, stadiumName, teamName, country, ligue, capacity, remodelation))
+             ? "Team added succesfully!!\n" : "Team couldn't be added. Check ID_Team\n") << endl;
+    cout << "Press Enter to continue...\n";
     cin.get();
 }
 
